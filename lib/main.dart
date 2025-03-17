@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'onboarding/splash.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
+
+
+
 void main() {
-  // Uncomment the following lines if you need Firebase initialization
-  /*
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  */
   runApp(const MyApp());
 }
 

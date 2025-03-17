@@ -1,49 +1,80 @@
 import 'package:flutter/material.dart';
 
-
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'الأشعارات',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Arial', // يمكنك تغيير الخط هنا إذا كان لديك خط معين
-      ),
-      home: NotificationsScreen(),
-    );
-  }
-}
-
 class NotificationsScreen extends StatelessWidget {
+  const NotificationsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('الأشعارات'),
+        backgroundColor: const Color.fromARGB(255, 79, 156, 250),
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
+              children: [
+                Icon(Icons.notifications_none),
+                SizedBox(width: 8),
                 Text(
-                  '5:12',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
-                ),
-                Text(
-                  'القاد بك',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  'الإشعارات',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
-            // يمكنك إضافة المزيد من العناصر هنا إذا لزم الأمر
+            SizedBox(height: 16),
+            Expanded(
+              child: ListView(
+                children: [
+                  _buildNotificationItem('مرحبا ---- اهلا بك', '5:12'),
+                  _buildEmptyNotificationItem(),
+                  _buildEmptyNotificationItem(),
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildNotificationItem(String message, String time) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black12),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(message),
+          Text(time),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEmptyNotificationItem() {
+    return Container(
+      height: 50,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black12),
+        borderRadius: BorderRadius.circular(8),
       ),
     );
   }

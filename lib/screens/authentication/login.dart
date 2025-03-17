@@ -1,11 +1,11 @@
 import 'package:br_final_project/home/home_widget/home.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
+import 'package:br_final_project/screens/authentication/signup.dart';
+import 'package:br_final_project/screens/authentication/forgetpass.dart';
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,6 +20,8 @@ class MyApp extends StatelessWidget {
 }
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,15 +64,15 @@ class LoginScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()), // الانتقال للصفحة الرئيسية
+                      MaterialPageRoute(builder: (context) =>HomeScreen()), // الانتقال للصفحة الرئيسية
                     );
                   },
-                  child: Text('Login'),
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white, 
                     backgroundColor: const Color.fromRGBO(33, 150, 243, 1),
                     minimumSize: Size(double.infinity, 50),
                   ),
+                  child: Text('Login'),
                 ),
                 SizedBox(height: 10),
                 // Sign Up section
@@ -82,7 +84,7 @@ class LoginScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpScreen()),
+                          MaterialPageRoute(builder: (context) => SignupScreen()),
                         );
                       },
                       child: Text('Sign Up'),
@@ -114,46 +116,4 @@ class LoginScreen extends StatelessWidget {
 }
 
 // HomePage
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-      ),
-      body: Center(
-        child: Text('Welcome to the Home Page!'),
-      ),
-    );
-  }
-}
 
-// SignUpScreen
-class SignUpScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign Up'),
-      ),
-      body: Center(
-        child: Text('This is the Sign Up screen'),
-      ),
-    );
-  }
-}
-
-// ForgotPasswordScreen
-class ForgotPasswordScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Forgot Password'),
-      ),
-      body: Center(
-        child: Text('This is the Forgot Password screen'),
-      ),
-    );
-  }
-}

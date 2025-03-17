@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-import '../../constant/constant.dart';
 import 'login.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,183 +15,141 @@ class _SignupScreenState extends State<SignupScreen> {
   final _email = TextEditingController();
   final _password = TextEditingController();
 
-  static const customGreen = Color.fromARGB(255, 121, 177, 90);
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: background,
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: Stack(
-          children: [
-            // إضافة الخلفية كصورة
-            Positioned.fill(
-              child: Image.asset(
-                "assets/images/background.jpg", // تأكد من وضع الصورة داخل مجلد assets
-                fit: BoxFit.cover, // لجعل الصورة تغطي الشاشة بالكامل
-              ),
-            ),
-            Center(
-              child: Container(
-                width: width * 0.8,
-                height: height * 0.6,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9), // شفافية للخلفية
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      spreadRadius: 2,
-                      blurRadius: 4,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _signupKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Create Account",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade700,
+                      ),
                     ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _name,
+                      decoration: InputDecoration(
+                        hintText: "Full Name",
+                        prefixIcon: Icon(Icons.person, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your name' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _phone,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        hintText: "Phone Number",
+                        prefixIcon: Icon(Icons.phone, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your phone number' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _email,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        hintText: "Email Address",
+                        prefixIcon: Icon(Icons.email, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your email' : null,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _password,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        prefixIcon: Icon(Icons.lock, color: Colors.blue),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? 'Please enter your password' : null,
+                    ),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade700,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_signupKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Account Created Successfully!"),
+                              ),
+                            );
+                          }
+                        },
+                        child: const Text(
+                          "Create Account",
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Already have an account? "),
+                          Text(
+                            "Sign In",
+                            style: TextStyle(
+                              color: Colors.blue.shade700,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
-                child: Form(
-                  key: _signupKey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 16),
-                        Text(
-                          "Sign UP",
-                          style: TextStyle(
-                            fontSize: fontlg,
-                            color: customGreen,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          controller: _name,
-                          decoration: InputDecoration(
-                            label: Text("Name",
-                                style: TextStyle(color: customGreen)),
-                            prefixIcon: Icon(Icons.person, color: customGreen),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your name';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          controller: _phone,
-                          decoration: InputDecoration(
-                            label: Text("Phone",
-                                style: TextStyle(color: customGreen)),
-                            prefix: const Text(
-                              "+962 ",
-                              style: TextStyle(
-                                  color: Colors.black45, fontSize: 18),
-                            ),
-                            prefixIcon: Icon(Icons.phone, color: customGreen),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your Phone';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          controller: _email,
-                          decoration: InputDecoration(
-                            label: Text("E-mail",
-                                style: TextStyle(color: customGreen)),
-                            prefixIcon: Icon(Icons.email, color: customGreen),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your E-mail';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 16),
-                        TextFormField(
-                          controller: _password,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            label: Text("Password",
-                                style: TextStyle(color: customGreen)),
-                            prefixIcon: Icon(Icons.lock, color: customGreen),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your password';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 40),
-                        Container(
-                          width: width * 0.7,
-                          height: height * 0.05,
-                          decoration: BoxDecoration(
-                            color: customGreen,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              if (_signupKey.currentState!.validate()) {
-                                _signupKey.currentState!.save();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        "Form Submitted { ${_name.text}, ${_email.text}, ${_phone.text} }"),
-                                  ),
-                                );
-                              }
-                            },
-                            child: Text(
-                              "Create Account",
-                              style: TextStyle(fontSize: 18, color: background),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ),
             ),
-            Positioned(
-              bottom: height * 0.1,
-              left: width * 0.25,
-              child: Row(
-                children: [
-                  Text(
-                    "Already have an account?",
-                    style: TextStyle(
-                        color: const Color.fromARGB(255, 148, 148, 148)),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    },
-                    child: Text(
-                      " Sign In",
-                      style: TextStyle(
-                          color: const Color.fromARGB(255, 231, 240, 227),
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

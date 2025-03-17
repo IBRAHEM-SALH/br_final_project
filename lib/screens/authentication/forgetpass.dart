@@ -1,138 +1,90 @@
 import 'package:flutter/material.dart';
 
-import '../../constant/constant.dart';
-import 'login.dart';
-
-class Forgotpassword extends StatefulWidget {
-  const Forgotpassword({super.key});
-
-  @override
-  State<Forgotpassword> createState() => _ForgotpasswordState();
-}
-
-class _ForgotpasswordState extends State<Forgotpassword> {
-  final _forgotPassword = GlobalKey<FormState>();
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: background,
+      backgroundColor: Colors.white,
       body: SafeArea(
-        child: SizedBox(
-          height: height,
-          child: Stack(
-            children: [
-              Container(color: navyBlue, height: height * 0.3, width: width),
-              Positioned(
-                top: height * 0.14,
-                left: width * 0.11,
-                child: Container(
-                  width: width * 0.8,
-                  height: height * 0.3,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: lightBlue,
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                      ),
-                    ],
-                    color: background,
-                    borderRadius: BorderRadius.circular(10),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Forgot Password",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue.shade700,
                   ),
-                  child: Form(
-                    key: _forgotPassword,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 16),
-                          Text(
-                            "FORGOT PASSWORD",
-                            style: TextStyle(
-                              fontSize: fontlg,
-                              color: navyBlue,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          Text(
-                            "Confirm your email and we will send the instruction",
-                            style: TextStyle(
-                              fontSize: fontxs,
-                              color: Colors.black45,
-                            ),
-                          ),
-                          SizedBox(height: 16),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              label: Text(
-                                "E-mail",
-                                style: TextStyle(color: blue),
-                              ),
-                              focusColor: blue,
-                              // hintText: "E-mail or Phone",
-                              prefixIcon: Icon(Icons.email, color: blue),
-                              hintStyle: TextStyle(color: blue),
-                            ),
-                          ),
-                          SizedBox(height: 25),
-                          Container(
-                            width: width * 0.7,
-                            height: height * 0.04,
-                            decoration: BoxDecoration(
-                              color: navyBlue,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "RESET PASSWORD",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: background,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  "Enter your email to receive password reset instructions.",
+                  style: TextStyle(fontSize: 14, color: Colors.black54),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: "Email Address",
+                    prefixIcon: Icon(Icons.email, color: Colors.blue),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Colors.blue, width: 2),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: height * 0.5,
-                left: width * 0.35,
-                child: Row(
-                  children: [
-                    Icon(Icons.arrow_back, size: fontmd, color: navyBlue),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        " Back to login",
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade700,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text(
+                      "Reset Password",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.arrow_back, color: Colors.blue),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Back to Login",
                         style: TextStyle(
-                          color: navyBlue,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue.shade700,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
